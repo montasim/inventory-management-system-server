@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const uri = "mongodb+srv://basic-databse-admin:HGYUGDbJKdhushnsudhs@cluster0.nvwif.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -23,6 +23,19 @@ async function run() {
             }
             else {
                 res.status(200).send(pharmacyProducts)
+            }
+        });
+
+        // get a pharmacy product by id
+        router.get('/:id', async (req, res) => {
+            const id = req?.params?.id;
+            const query = { _id: ObjectId(id) };
+            const pharmacyProduct = await pharmacyProductsCollection.findOne(query);
+
+            if (pharmacyProduct) {
+                res.status(200).json(pharmacyProduct);
+            } else {
+                res.status(400).json({ message: `Pharmacy product with ${req.params.id} not found!` });
             }
         });
     } finally {

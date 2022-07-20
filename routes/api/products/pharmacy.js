@@ -46,6 +46,15 @@ async function run() {
 
             res.send(newProduct);
         });
+
+        // delete a pharmacy product
+        app.delete('/:id', async (req, res) => {
+            const id = req?.params?.id;
+            const query = { _id: ObjectId(id) };
+            const deletedPharmacyProduct = await pharmacyProductsCollection.deleteOne(query);
+
+            res.send(deletedPharmacyProduct);
+        });
     } finally {
         // await client.close();
     };

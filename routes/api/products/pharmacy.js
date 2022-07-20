@@ -38,6 +38,14 @@ async function run() {
                 res.status(400).json({ message: `Pharmacy product with ${req.params.id} not found!` });
             }
         });
+
+        // add new pharmacy product
+        router.post('/', async (req, res) => {
+            const newPharmacyProduct = req?.body;
+            const newProduct = await pharmacyProductsCollection.insertOne(newPharmacyProduct);
+
+            res.send(newProduct);
+        });
     } finally {
         // await client.close();
     };

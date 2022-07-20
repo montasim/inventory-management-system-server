@@ -55,6 +55,24 @@ async function run() {
 
             res.send(deletedPharmacyProduct);
         });
+
+        // update a pharmacy product data
+        app.put('/:id', async (req, res) => {
+            const id = req?.params?.id;
+            const updatePharmacyProduct = req?.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatePharmacyProductData = {
+                $set: {
+                    name: updatePharmacyProduct.name
+                }
+            };
+
+            const updatedProduct = await pharmacyProductsCollection.updateOne(filter, updatePharmacyProductData, options);
+
+            res.send(updatedProduct);
+        });
+
     } finally {
         // await client.close();
     };

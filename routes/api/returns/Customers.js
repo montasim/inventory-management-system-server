@@ -19,7 +19,7 @@ async function run() {
             const customers = await cursor.toArray();
 
             if ((await cursor?.countDocuments) === 0) {
-                res.status(400).send("No Customers found");
+                res.status(400).send("No customers found");
             }
             else {
                 res.status(200).send(customers)

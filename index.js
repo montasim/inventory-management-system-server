@@ -38,6 +38,9 @@ app.use('/api/categories', require('./routes/api/categories/categories'));
 // companies api routes
 app.use('/api/companies', require('./routes/api/companies/companies'));
 
+// companies api routes
+app.use('/api/unitTypes', require('./routes/api/unitTypes/unitTypes'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

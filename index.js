@@ -32,6 +32,9 @@ app.use('/api/purchases/pharmacy', require('./routes/api/orders/pharmacy'));
 // orders non pharmacy api routes
 app.use('/api/purchases/nonPharmacy', require('./routes/api/orders/nonPharmacy'));
 
+// categories api routes
+app.use('/api/categories', require('./routes/api/categories/categories'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

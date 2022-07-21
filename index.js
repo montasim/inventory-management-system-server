@@ -8,11 +8,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// pharmacy products api routes
+// products pharmacy api routes
 app.use('/api/products/pharmacy', require('./routes/api/products/pharmacy'));
 
-// non pharmacy products api routes
+// products non pharmacy api routes
 app.use('/api/products/nonPharmacy', require('./routes/api/products/nonPharmacy'));
+
+// requested items pharmacy api routes
+app.use('/api/requestedItems/pharmacy', require('./routes/api/requestedItems/pharmacy'));
+
+// requested items non pharmacy api routes
+app.use('/api/requestedItems/nonPharmacy', require('./routes/api/requestedItems/nonPharmacy'));
 
 // index route
 app.get('/', (req, res) => {

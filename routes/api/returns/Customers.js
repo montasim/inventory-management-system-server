@@ -26,7 +26,7 @@ async function run() {
             }
         });
 
-        // get a Customer by id
+        // get a customer by id
         router.get('/:id', async (req, res) => {
             const id = req?.params?.id;
             const query = { _id: ObjectId(id) };
@@ -39,7 +39,7 @@ async function run() {
             }
         });
 
-        // add new Customer
+        // add a new customer
         router.post('/', async (req, res) => {
             const newCustomer = req?.body;
             const newItems = await customersCollection.insertOne(newCustomer);
@@ -47,7 +47,7 @@ async function run() {
             res.send(newItems);
         });
 
-        // delete a Customer
+        // delete a customer
         router.delete('/:id', async (req, res) => {
             const id = req?.params?.id;
             const query = { _id: ObjectId(id) };
@@ -56,7 +56,7 @@ async function run() {
             res.send(deletedCustomer);
         });
 
-        // update a Customer data
+        // update a customer data
         router.put('/:id', async (req, res) => {
             const id = req?.params?.id;
             const updateCustomer = req?.body;

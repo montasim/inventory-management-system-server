@@ -11,7 +11,7 @@ async function run() {
     try {
         await client.connect();
 
-        // get all Customers
+        // get all customers
         router.get('/', async (req, res) => {
             const query = {};
             const cursor = customersCollection.find(query);

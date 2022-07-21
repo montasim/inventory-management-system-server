@@ -11,6 +11,9 @@ app.use(express.json());
 // pharmacy products api routes
 app.use('/api/products/pharmacy', require('./routes/api/products/pharmacy'));
 
+// non pharmacy products api routes
+app.use('/api/products/nonPharmacy', require('./routes/api/products/nonPharmacy'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

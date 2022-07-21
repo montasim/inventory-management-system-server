@@ -33,13 +33,13 @@ app.use('/api/purchases/pharmacy', require('./routes/api/orders/pharmacy'));
 app.use('/api/purchases/nonPharmacy', require('./routes/api/orders/nonPharmacy'));
 
 // categories api routes
-app.use('/api/categories', require('./routes/api/categories/categories'));
+app.use('/api/setup/categories', require('./routes/api/setup/categories'));
 
 // companies api routes
-app.use('/api/companies', require('./routes/api/companies/companies'));
+app.use('/api/setup/companies', require('./routes/api/setup/companies'));
 
 // companies api routes
-app.use('/api/unitTypes', require('./routes/api/unitTypes/unitTypes'));
+app.use('/api/setup/unitTypes', require('./routes/api/setup/unitTypes'));
 
 // index route
 app.get('/', (req, res) => {

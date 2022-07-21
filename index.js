@@ -20,6 +20,12 @@ app.use('/api/requestedItems/pharmacy', require('./routes/api/requestedItems/pha
 // requested items non pharmacy api routes
 app.use('/api/requestedItems/nonPharmacy', require('./routes/api/requestedItems/nonPharmacy'));
 
+// orders pharmacy api routes
+app.use('/api/orders/pharmacy', require('./routes/api/orders/pharmacy'));
+
+// orders non pharmacy api routes
+app.use('/api/orders/nonPharmacy', require('./routes/api/orders/nonPharmacy'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

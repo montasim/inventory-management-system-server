@@ -48,7 +48,7 @@ async function run() {
         });
 
         // delete a pharmacy product
-        app.delete('/:id', async (req, res) => {
+        router.delete('/:id', async (req, res) => {
             const id = req?.params?.id;
             const query = { _id: ObjectId(id) };
             const deletedPharmacyProduct = await pharmacyProductsCollection.deleteOne(query);
@@ -57,7 +57,7 @@ async function run() {
         });
 
         // update a pharmacy product data
-        app.put('/:id', async (req, res) => {
+        router.put('/:id', async (req, res) => {
             const id = req?.params?.id;
             const updatePharmacyProduct = req?.body;
             const filter = { _id: ObjectId(id) };

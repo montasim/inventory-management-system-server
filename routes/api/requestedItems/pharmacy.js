@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-const uri = "mongodb+srv://basic-databse-admin:HGYUGDbJKdhushnsudhs@cluster0.nvwif.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://stringlab-ims-db-admin:uCETlFKjGyOQ6M4Y@cluster0.50yg5.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
-    const pharmacyRequestedItemsCollection = client.db('dummy-data').collection('category');
+    const pharmacyRequestedItemsCollection = client.db('requestedItems').collection('pharmacy');
 
     try {
         await client.connect();

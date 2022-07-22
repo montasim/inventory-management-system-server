@@ -38,8 +38,11 @@ app.use('/api/setup/categories', require('./routes/api/setup/categories'));
 // companies api routes
 app.use('/api/setup/companies', require('./routes/api/setup/companies'));
 
-// companies api routes
+// unit types api routes
 app.use('/api/setup/unitTypes', require('./routes/api/setup/unitTypes'));
+
+// employees api routes
+app.use('/api/employees', require('./routes/api/employees/employees'));
 
 // index route
 app.get('/', (req, res) => {

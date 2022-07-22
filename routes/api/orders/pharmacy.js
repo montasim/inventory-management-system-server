@@ -29,13 +29,18 @@ async function run() {
         // get a non pharmacy orders by id
         router.get('/:id', async (req, res) => {
             const id = req?.params?.id;
-            const query = { _id: ObjectId(id) };
-            const pharmacyOrders = await pharmacyOrdersCollection.findOne(query);
 
-            if (pharmacyOrders) {
-                res.status(200).json(pharmacyOrders);
+            if (id === undefined || 'undefined' || id === null) {
+                res.status(400).json({ message: `Pharmacy product with ${req.params.id} not found!` });
             } else {
-                res.status(400).json({ message: `Non Pharmacy orders with ${req.params.id} not found!` });
+                const query = { _id: ObjectId(id) };
+                const pharmacyOrders = await pharmacyOrdersCollection.findOne(query);
+
+                if (pharmacyOrders) {
+                    res.status(200).json(pharmacyOrders);
+                } else {
+                    res.status(400).json({ message: `Non Pharmacy orders with ${req.params.id} not found!` });
+                }
             }
         });
 

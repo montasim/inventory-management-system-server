@@ -29,13 +29,18 @@ async function run() {
         // get a companies by id
         router.get('/:id', async (req, res) => {
             const id = req?.params?.id;
-            const query = { _id: ObjectId(id) };
-            const company = await companiesCollection.findOne(query);
 
-            if (company) {
-                res.status(200).json(company);
+            if (id === undefined || 'undefined' || id === null) {
+                res.status(400).json({ message: `Company with ${req.params.id} not found!` });
             } else {
-                res.status(400).json({ message: `companies with ${req.params.id} not found!` });
+                const query = { _id: ObjectId(id) };
+                const company = await companiesCollection.findOne(query);
+
+                if (company) {
+                    res.status(200).json(company);
+                } else {
+                    res.status(400).json({ message: `companies with ${req.params.id} not found!` });
+                }
             }
         });
 

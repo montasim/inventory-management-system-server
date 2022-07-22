@@ -29,13 +29,18 @@ async function run() {
         // get a unit type by id
         router.get('/:id', async (req, res) => {
             const id = req?.params?.id;
-            const query = { _id: ObjectId(id) };
-            const unitType = await unitTypesCollection.findOne(query);
 
-            if (unitType) {
-                res.status(200).json(unitType);
+            if (id === undefined || 'undefined' || id === null) {
+                res.status(400).json({ message: `Unit Type with ${req.params.id} not found!` });
             } else {
-                res.status(400).json({ message: `Unit type with ${req.params.id} not found!` });
+                const query = { _id: ObjectId(id) };
+                const unitType = await unitTypesCollection.findOne(query);
+
+                if (unitType) {
+                    res.status(200).json(unitType);
+                } else {
+                    res.status(400).json({ message: `Unit type with ${req.params.id} not found!` });
+                }
             }
         });
 

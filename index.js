@@ -44,6 +44,9 @@ app.use('/api/setup/unitTypes', require('./routes/api/setup/unitTypes'));
 // employees api routes
 app.use('/api/employees', require('./routes/api/employees/employees'));
 
+// customers api routes
+app.use('/api/customers', require('./routes/api/customers/customers'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

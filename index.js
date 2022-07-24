@@ -48,7 +48,7 @@ app.use('/api/employees', require('./routes/api/employees/employees'));
 app.use('/api/customers', require('./routes/api/customers/customers'));
 
 // customers returns api routes
-app.use('/api/returns/customers', require('./routes/api/returns/customers'));
+app.use('/api/returns/customers', require('./routes/api/returns/customersReturns'));
 
 // expires or damages returns api routes
 app.use('/api/returns/expiresOrDamagesReturns', require('./routes/api/returns/expiresOrDamagesReturns'));

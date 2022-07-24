@@ -50,6 +50,9 @@ app.use('/api/customers', require('./routes/api/customers/customers'));
 // customers returns api routes
 app.use('/api/returns/customers', require('./routes/api/returns/customers'));
 
+// expires or damages returns api routes
+app.use('/api/returns/expiresOrDamagesReturns', require('./routes/api/returns/expiresOrDamagesReturns'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

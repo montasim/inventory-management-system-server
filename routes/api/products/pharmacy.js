@@ -29,13 +29,19 @@ async function run() {
         // get a pharmacy product by id
         router.get('/:id', async (req, res) => {
             const id = req?.params?.id;
-            const query = { _id: ObjectId(id) };
-            const pharmacyProduct = await pharmacyProductsCollection.findOne(query);
 
-            if (pharmacyProduct) {
-                res.status(200).json(pharmacyProduct);
-            } else {
-                res.status(400).json({ message: `Pharmacy product with ${req.params.id} not found!` });
+            if (id.length === 24) {
+                const query = { _id: ObjectId(id) };
+                const pharmacyProduct = await pharmacyProductsCollection.findOne(query);
+
+                if (pharmacyProduct) {
+                    res.status(200).json(pharmacyProduct);
+                } else {
+                    res.status(400).json({ message: `Pharmacy product with ${req.params.id} not found!` });
+                }
+            }
+            else {
+                res.status(400).json({ message: `Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer!` });
             }
         });
 

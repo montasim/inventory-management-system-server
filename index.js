@@ -59,6 +59,9 @@ app.use('/api/suppliers/documents', require('./routes/api/suppliers/documents'))
 // suppliers lists api routes
 app.use('/api/suppliers/lists', require('./routes/api/suppliers/lists'));
 
+// suppliers payments api routes
+app.use('/api/suppliers/payments', require('./routes/api/suppliers/payments'));
+
 // index route
 app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');

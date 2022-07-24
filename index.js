@@ -67,6 +67,11 @@ app.get('/', (req, res) => {
     res.send('Welcome to Inventory Management System Server');
 });
 
+// invalid route
+app.get('*', (req, res) => {
+    res.status(400).json({ message: `Invalid route.` });
+});
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });

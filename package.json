@@ -8,13 +8,23 @@
   },
   "name": "inventory-management-system-server",
   "version": "1.0.0",
+  "description": "Legacy Express and MongoDB REST API for pharmacy inventory, purchasing, orders, returns, customers, employees, and suppliers.",
+  "keywords": [
+    "expressjs",
+    "mongodb",
+    "nodejs",
+    "rest-api",
+    "vercel",
+    "programming-hero-assignment",
+    "programming-hero-projects",
+    "inventory-management",
+    "learning-project"
+  ],
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }

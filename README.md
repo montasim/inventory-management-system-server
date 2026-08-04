@@ -1,59 +1,120 @@
-# inventory-management-system-server
+# Inventory Management System Server
 
-<br>
-<br>
+A legacy Express and MongoDB REST API for pharmacy and non-pharmacy inventory, purchasing, orders, returns, customers, employees, and supplier records.
 
-<!-- connect with me start -->
-<div align="center"> 
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&duration=1&pause=1000&repeat=false&width=410&lines=%F0%9F%93%AA+%F0%9D%97%99%F0%9D%97%98%F0%9D%97%98%F0%9D%97%9F+%F0%9D%97%99%F0%9D%97%A5%F0%9D%97%98%F0%9D%97%98+%F0%9D%97%A7%F0%9D%97%A2+%F0%9D%97%96%F0%9D%97%A2%F0%9D%97%A1%F0%9D%97%A7%F0%9D%97%94%F0%9D%97%96%F0%9D%97%A7+%F0%9D%97%A0%F0%9D%97%98+%F0%9D%97%94%F0%9D%97%A1%F0%9D%97%AC%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A0%F0%9D%97%98" alt="Typing SVG" />
-</div>
+> **Security warning:** this repository contains a MongoDB connection string with credentials in tracked route files. Assume those credentials are compromised, revoke and rotate them before running the code, remove them from Git history, and replace them with environment variables.
 
-<br>
+> **Project status:** educational/legacy code. The listed Vercel deployment returned `404 NOT_FOUND` when checked on 4 August 2026.
 
-<!-- social media links start -->
-<table align="center">
-  <thead align="center">
-      <tr>
-          <th>
-              <a href="https://www.linkedin.com/in/montasim">
-                  <img alt="linkedin icon" src="https://cdn.simpleicons.org/linkedin" width="35px">
-              </a>
-          </th>
-          <th>
-              <a href="https://www.github.com/montasim">
-                  <img alt="github icon" src="https://cdn.simpleicons.org/github/white" width="35px">
-              </a>
-          </th>
-          <th>
-              <a href="https://stackoverflow.com/users/20348607/montasim">
-                  <img alt="github icon" src="https://cdn.simpleicons.org/stackoverflow" width="35px">
-              </a>
-          </th>
-          <th>
-              <a href="https://montasim-dev.web.app/">
-                  <img alt="web icon" src="https://cdn.simpleicons.org/googlechrome" width="35px">
-              </a>
-          </th>
-          <th>
-              <a href="mailto:montasimmamun@gmail.com">
-                  <img alt="gmail icon" src="https://cdn.simpleicons.org/gmail" width="35px">
-              </a>
-          </th>
-          <th>
-              <a href="https://www.facebook.com/montasimmamun/">
-                  <img alt="facebook icon" src="https://cdn.simpleicons.org/facebook" width="35px">
-              </a>
-          </th>
-          <th>
-              <a href="https://twitter.com/montasimmamun">
-                  <img alt="facebook icon" src="https://cdn.simpleicons.org/twitter" width="35px">
-              </a>
-          </th>
-      </tr>
-  </thead>
-</table>
-<!-- social media links end -->
-<!-- connect with me end -->
+## What it covers
 
-<br>
-<br>
+- Pharmacy and non-pharmacy product CRUD
+- Requested-item records
+- Orders and purchase records
+- Categories, companies, and unit types
+- Employees and customers
+- Customer, expired, and damaged-item returns
+- Supplier documents, lists, and payments
+- JSON request handling and permissive CORS
+
+## Tech stack
+
+- Node.js and CommonJS
+- Express 4
+- MongoDB Node.js driver 4
+- dotenv
+- Nodemon for local development
+
+## Quick start
+
+### Prerequisites
+
+- A maintained Node.js release compatible with the dependency lockfile
+- A MongoDB database
+- npm
+
+### Secure the repository first
+
+Do not connect using the credentials committed in `routes/`. Rotate the database user in MongoDB, then refactor every route module to read a single connection URI from an untracked environment file:
+
+```dotenv
+MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>/<database>
+PORT=5000
+```
+
+The current code does not yet consume `MONGODB_URI`; that refactor is required before safe use.
+
+### Install and run
+
+```bash
+git clone https://github.com/montasim/inventory-management-system-server.git
+cd inventory-management-system-server
+npm install
+npm run dev
+```
+
+For a non-watching process, use `npm start`. The server defaults to `http://localhost:5000`.
+
+## API map
+
+The application mounts resource routers under these prefixes:
+
+| Resource | Prefix |
+| --- | --- |
+| Pharmacy products | `/api/products/pharmacy` |
+| Non-pharmacy products | `/api/products/nonPharmacy` |
+| Requested items | `/api/requestedItems/pharmacy`, `/api/requestedItems/nonPharmacy` |
+| Orders | `/api/orders/pharmacy`, `/api/orders/nonPharmacy` |
+| Purchases | `/api/purchases/pharmacy`, `/api/purchases/nonPharmacy` |
+| Setup | `/api/setup/categories`, `/api/setup/companies`, `/api/setup/unitTypes` |
+| People | `/api/employees`, `/api/customers` |
+| Returns | `/api/returns/customers`, `/api/returns/expiresOrDamagesReturns` |
+| Suppliers | `/api/suppliers/documents`, `/api/suppliers/lists`, `/api/suppliers/payments` |
+
+Most resource routers expose collection reads and creates at `/` and item reads, updates, and deletes at `/:id`. Inspect the corresponding module under [routes/api](routes/api) for the exact payload and behavior.
+
+## Project structure
+
+```text
+.
+├── index.js                  # Express entry point and route mounting
+├── routes/api/              # Resource-specific MongoDB routers
+├── package.json
+└── node_modules/            # Legacy committed dependency tree
+```
+
+## Important limitations
+
+- Database credentials are exposed in source and require immediate rotation.
+- `node_modules` is committed. A future maintenance change should remove it from version control and rely on `package-lock.json`.
+- No authentication or authorization middleware protects the data-changing endpoints.
+- CORS is unrestricted.
+- There are no automated tests, API schema, CI workflow, or documented validation rules.
+- Several routers open independent MongoDB clients and do not close them.
+- The purchase mounts in `index.js` currently import the order routers rather than the purchase routers.
+- The repository has no root license file; `"license": "ISC"` in package metadata alone does not provide the full license text.
+
+This code is useful as a learning artifact, but it should not be exposed to production traffic without a security and data-model review.
+
+## Verification
+
+After starting the service:
+
+```bash
+curl http://localhost:5000/
+curl http://localhost:5000/api/setup/categories
+```
+
+The first request should return the server welcome message. Resource responses depend on your database.
+
+## Contributing and security
+
+Open an issue before making substantial changes. For the exposed credential, contact the maintainer privately rather than posting replacement secrets in an issue.
+
+## Support
+
+Use [GitHub Issues](https://github.com/montasim/inventory-management-system-server/issues) for reproducible bugs or documentation gaps. You can also [support the maintainer on SupportKori](https://www.supportkori.com/montasim).
+
+## License status
+
+No root license file is present. Until the maintainer adds an explicit license, copyright law reserves reuse rights despite the package metadata mentioning ISC.
